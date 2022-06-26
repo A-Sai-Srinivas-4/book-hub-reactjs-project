@@ -9,7 +9,7 @@ const BooksSlider = props => {
   const settings = {
     dots: false,
     slidesToScroll: 2,
-    slidesToShow: 4,
+    slidesToShow: 3,
   }
   const {booksList, textColor} = props
 

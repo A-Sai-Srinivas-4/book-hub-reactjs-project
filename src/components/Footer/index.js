@@ -12,16 +12,16 @@ const Footer = () => (
         <div className="footer-container">
           <div className="responsive-footer">
             <button type="button" className="footer-buttons">
-              <FaGoogle className={textColor} size={20} />
+              <FaGoogle className={textColor} size={18} />
             </button>
             <button type="button" className="footer-buttons">
-              <FaTwitter className={textColor} size={20} />
+              <FaTwitter className={textColor} size={18} />
             </button>
             <button type="button" className="footer-buttons">
-              <FaInstagram className={textColor} size={20} />
+              <FaInstagram className={textColor} size={18} />
             </button>
             <button type="button" className="footer-buttons">
-              <FaYoutube className={textColor} size={20} />
+              <FaYoutube className={textColor} size={18} />
             </button>
           </div>
           <p className={`contact-us-heading ${textColor}`}>Contact Us</p>

@@ -8,8 +8,8 @@ const BookItem = props => {
     <li key={id} className="slick-item">
       <Link to={`/books/${id}`} className="text-links">
         <img src={coverPic} className="slick-item-cover-pic" alt="title" />
-        <h1 className={`title ${textColor}`}>{title}</h1>
-        <p className={`author-name ${textColor}`}>{authorName}</p>
+        <h1 className={`slick-item-title ${textColor}`}>{title}</h1>
+        <p className={`slick-item-author-name ${textColor}`}>{authorName}</p>
       </Link>
     </li>
   )

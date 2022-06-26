@@ -17,11 +17,15 @@
   color: #f9f9f9;
 }
 .contact-us-heading {
-  font-family: 'Roboto';
+  font-family: 'HK Grotesk';
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
   font-size: 16px;
+  color: #3d3c3c;
 }
 .responsive-footer {
-  width: 30%;
+  width: 10%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;

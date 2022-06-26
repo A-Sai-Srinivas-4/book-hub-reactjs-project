@@ -1,6 +1,5 @@
 .navbar {
-  max-height: 100px;
-  width: 100%;
+  padding: 5px;
 }
 .header-light-theme {
   background-color: #ffffff;
@@ -8,6 +7,7 @@
 .header-dark-theme {
   background-color: #3a3d3b;
 }
+
 @media screen and (max-width: 768px) {
   .navbar {
     max-height: 150px;
@@ -17,8 +17,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 50px;
+  padding-left: 100px;
   padding-right: 50px;
+  width: 95%;
 }
 @media screen and (max-width: 768px) {
   .header-responsive-navbar {
@@ -28,15 +29,14 @@
   }
 }
 .website-logo {
-  width: 80px;
-  height: 30px;
+  height: 28px;
+  width: 100px;
 }
 .nav-items-container {
-  width: 40%;
   list-style-type: none;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: flex-end;
 }
 @media screen and (min-width: 768px) {
   .nav-items-container {
@@ -44,6 +44,8 @@
   }
   .website-logo {
     margin-left: 20px;
+    width: 133px;
+    height: 41px;
   }
 }
 .mobile-nav-items-container {
@@ -101,11 +103,13 @@
 .nav-links {
   text-decoration: none;
   color: #7ba1e3;
+  margin-right: 30px;
 }
 .nav-text {
   font-family: 'Roboto';
   font-size: 18px;
 }
+
 .light-theme-text {
   color: #475569;
 }
@@ -116,12 +120,13 @@
   color: #7ba1e3;
 }
 .logout-button {
-  height: 24px;
-  width: 50px;
-  background-color: #3a76de;
+  height: 32px;
+  width: 73px;
+  background-color: #0284c7;
   color: #ffffff;
   border: none;
   border-radius: 4px;
   font-family: 'Roboto';
   font-size: 12px;
+  margin-left: 30px;
 }

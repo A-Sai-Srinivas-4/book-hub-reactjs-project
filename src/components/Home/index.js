@@ -148,19 +148,26 @@ class Home extends Component {
               <div className={`home-container ${bgColor}`}>
                 <div className={`responsive-home ${bgColor}`}>
                   <h1 className={`heading ${textColor}`}>
-                    Find Your Next Favorite Books
+                    Find Your Next Favorite Books?
                   </h1>
                   <p className={`description ${textColor}`}>
                     You are in the right place. Tell us what titles or genres
                     you have enjoyed in the past, and we will give you
                     surprisingly insightful recommendations.
                   </p>
+                  <div className="mobile-view-find-button">
+                    <Link to="/shelf">
+                      <button type="button" className="find-books-button">
+                        Find Books
+                      </button>
+                    </Link>
+                  </div>
                   <div className={`slider-container ${bgColor1}`}>
                     <div className="top-rated-books-find-books">
                       <h1 className={`top-rated-books-heading ${textColor}`}>
                         Top Rated Books
                       </h1>
-                      <div>
+                      <div className="desktop-view-find-button">
                         <Link to="/shelf">
                           <button type="button" className="find-books-button">
                             Find Books

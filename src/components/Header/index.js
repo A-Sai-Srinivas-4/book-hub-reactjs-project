@@ -90,42 +90,43 @@ class Header extends Component {
                 >
                   <MdMenu className={textColor} size={20} />
                 </button>
+
+                {isToggle && (
+                  <ul className="mobile-nav-items-container">
+                    <Link to="/" className="nav-links">
+                      <li className={`nav-text ${textColor}`}>Home</li>
+                    </Link>
+                    <Link to="/shelf" className="nav-links">
+                      <li className={`nav-text ${textColor}`}>Bookshelves</li>
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={onClickThemeButton}
+                      className="theme-button"
+                    >
+                      <FiSun className={textColor} size={25} />
+                    </button>
+                    <Link to="/login" className="nav-links">
+                      <li>
+                        <button
+                          type="button"
+                          onClick={this.onClickLogout}
+                          className="logout-button"
+                        >
+                          Logout
+                        </button>
+                      </li>
+                    </Link>
+                    <button
+                      type="button"
+                      className="close-icon"
+                      onClick={this.onClickCloseIcon}
+                    >
+                      <AiOutlineClose className={textColor} size={20} />
+                    </button>
+                  </ul>
+                )}
               </div>
-              {isToggle && (
-                <ul className="mobile-nav-items-container">
-                  <Link to="/" className="nav-links">
-                    <li className={`nav-text ${textColor}`}>Home</li>
-                  </Link>
-                  <Link to="/shelf" className="nav-links">
-                    <li className={`nav-text ${textColor}`}>Bookshelves</li>
-                  </Link>
-                  <button
-                    type="button"
-                    onClick={onClickThemeButton}
-                    className="theme-button"
-                  >
-                    <FiSun className={textColor} size={25} />
-                  </button>
-                  <Link to="/login" className="nav-links">
-                    <li>
-                      <button
-                        type="button"
-                        onClick={this.onClickLogout}
-                        className="logout-button"
-                      >
-                        Logout
-                      </button>
-                    </li>
-                  </Link>
-                  <button
-                    type="button"
-                    className="close-icon"
-                    onClick={this.onClickCloseIcon}
-                  >
-                    <AiOutlineClose className={textColor} size={20} />
-                  </button>
-                </ul>
-              )}
             </nav>
           )
         }}
