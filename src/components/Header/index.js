@@ -1,14 +1,16 @@
 import {Component} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import {MdMenu} from 'react-icons/md'
+import {FcHome} from 'react-icons/fc'
+import {ImBooks} from 'react-icons/im'
 import {AiOutlineClose} from 'react-icons/ai'
-import {FiSun} from 'react-icons/fi'
+import {FiLogOut, FiSun} from 'react-icons/fi'
 import Cookies from 'js-cookie'
 import BookHubThemeContext from '../../context/BookHubThemeContext'
 import './index.css'
 
 class Header extends Component {
-  state = {isToggle: false}
+  state = {isToggle: true}
 
   onClickCloseIcon = () => {
     this.setState(prevState => ({
@@ -83,40 +85,16 @@ class Header extends Component {
                     </li>
                   </Link>
                 </ul>
-                <button
-                  type="button"
-                  className="menu-icon"
-                  onClick={this.onClickMenuIcon}
-                >
-                  <MdMenu className={textColor} size={20} />
-                </button>
-
-                {isToggle && (
+                {isToggle ? (
+                  <button
+                    type="button"
+                    className="menu-icon"
+                    onClick={this.onClickMenuIcon}
+                  >
+                    <MdMenu className={textColor} size={20} />
+                  </button>
+                ) : (
                   <ul className="mobile-nav-items-container">
-                    <Link to="/" className="nav-links">
-                      <li className={`nav-text ${textColor}`}>Home</li>
-                    </Link>
-                    <Link to="/shelf" className="nav-links">
-                      <li className={`nav-text ${textColor}`}>Bookshelves</li>
-                    </Link>
-                    <button
-                      type="button"
-                      onClick={onClickThemeButton}
-                      className="theme-button"
-                    >
-                      <FiSun className={textColor} size={25} />
-                    </button>
-                    <Link to="/login" className="nav-links">
-                      <li>
-                        <button
-                          type="button"
-                          onClick={this.onClickLogout}
-                          className="logout-button"
-                        >
-                          Logout
-                        </button>
-                      </li>
-                    </Link>
                     <button
                       type="button"
                       className="close-icon"
@@ -124,6 +102,30 @@ class Header extends Component {
                     >
                       <AiOutlineClose className={textColor} size={20} />
                     </button>
+
+                    <Link to="/" className="nav-links">
+                      <FcHome size={25} className="mobile-view-icon" />
+                    </Link>
+                    <Link to="/shelf" className="nav-links">
+                      <ImBooks size={25} className="mobile-view-icon" />
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={onClickThemeButton}
+                      className="theme-button"
+                    >
+                      <FiSun
+                        className={`mobile-view-icon ${textColor}`}
+                        size={25}
+                      />
+                    </button>
+                    <Link to="/login" className="nav-links">
+                      <FiLogOut
+                        size={25}
+                        className="mobile-view-icon"
+                        onClick={this.onClickLogout}
+                      />
+                    </Link>
                   </ul>
                 )}
               </div>

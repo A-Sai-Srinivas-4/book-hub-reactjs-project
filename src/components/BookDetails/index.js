@@ -71,7 +71,7 @@ class BookDetails extends Component {
     <BookHobThemeContext.Consumer>
       {value => {
         const {isDarkTheme} = value
-        const bgColor = isDarkTheme ? 'card-dark-theme' : 'light-theme'
+        const bgColor = isDarkTheme ? 'card-dark-theme' : 'card-light-theme'
         const textColor = !isDarkTheme ? 'light-theme-text' : 'dark-theme-text'
         const {bookDetails} = this.state
         const {
@@ -86,26 +86,30 @@ class BookDetails extends Component {
         return (
           <div className={`book-details-responsive-container ${bgColor}`}>
             <div className="book-details-top-card">
-              <div className="cover-pic-description">
+              <div className="cover-pic-description-container">
                 <img src={coverPic} className="cover-pic" alt={title} />
                 <div className="book-description-container">
                   <h1 className={`title ${textColor}`}>{title}</h1>
                   <p className={`author-name ${textColor}`}>{authorName}</p>
                   <p className={`rating ${textColor}`}>
-                    Avg Rating <BsFillStarFill size={12} className="star" />{' '}
+                    Avg Rating {'  '}
+                    <BsFillStarFill className="star" />
+                    {'  '}
                     {rating}
                   </p>
                   <p className={`read-status ${textColor}`}>
-                    Status:{' '}
+                    Status :{'  '}
                     <span className="read-status-span-text">{readStatus}</span>
                   </p>
                 </div>
               </div>
               <hr className="separator" />
-              <h1 className={`about-heading ${textColor}`}>About Author</h1>
-              <p className={`description ${textColor}`}>{aboutAuthor}</p>
-              <h1 className={`about-heading ${textColor}`}>About Book</h1>
-              <p className={`description ${textColor}`}>{aboutBook}</p>
+              <div className="about-container">
+                <h1 className={`about-heading ${textColor}`}>About Author</h1>
+                <p className={`description ${textColor}`}>{aboutAuthor}</p>
+                <h1 className={`about-heading ${textColor}`}>About Book</h1>
+                <p className={`description ${textColor}`}>{aboutBook}</p>
+              </div>
             </div>
           </div>
         )

@@ -11,6 +11,7 @@
 @media screen and (max-width: 768px) {
   .navbar {
     max-height: 150px;
+    padding-right: 20px;
   }
 }
 .header-responsive-navbar {
@@ -29,8 +30,10 @@
   }
 }
 .website-logo {
-  height: 28px;
-  width: 100px;
+  height: 24px;
+  width: 92px;
+  margin: 10px;
+  margin-top: 3px;
 }
 .nav-items-container {
   list-style-type: none;
@@ -56,18 +59,17 @@
     display: none;
   }
   .mobile-nav-items-container {
-    height: 50px;
     width: 100%;
     list-style-type: none;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-bottom: 0px;
+    padding: 0px;
+    margin: 0px;
   }
-  .nav-text {
-    font-size: 15px;
+  .mobile-view-icon {
+    margin: 0px;
+    padding: 0px;
   }
 }
 .theme-button {
@@ -105,9 +107,20 @@
   color: #7ba1e3;
   margin-right: 30px;
 }
+@media screen and (max-width: 768px) {
+  .nav-links {
+    margin: 10px;
+  }
+}
 .nav-text {
   font-family: 'Roboto';
   font-size: 18px;
+  font-weight: 500;
+}
+@media screen and (max-width: 768px) {
+  .home-icon {
+    font-size: 30px;
+  }
 }
 
 .light-theme-text {

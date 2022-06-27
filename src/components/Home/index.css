@@ -70,7 +70,7 @@
   .description {
     font-size: 14px;
     line-height: 24px;
-    margin-left: 0px;
+    margin-left: 10px;
     width: 90%;
   }
 }
@@ -118,7 +118,7 @@
   .mobile-view-find-button {
     display: flex;
     align-self: flex-start;
-    margin-left: 15px;
+    margin-left: 8px;
     margin-top: 15px;
   }
   .desktop-view-find-button {
@@ -137,9 +137,9 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
-  margin-top: 40px;
+  margin-top: 50px;
   margin-bottom: 100px;
-  width: 90%;
+  width: 85%;
   box-shadow: 0px 0px 1px rgba(40, 41, 61, 0.08),
     0px 1px 2px rgba(96, 97, 112, 0.16);
   border-radius: 16px;
@@ -169,8 +169,7 @@
   }
   .slick-container {
     height: 150px;
-    width: 95%;
-    width: 280px;
+    width: 100%;
   }
 }
 
@@ -198,7 +197,7 @@
 
 .slick-item-cover-pic {
   width: 350px;
-  max-width: 93%;
+  max-width: 85%;
   height: 200px;
   border-radius: 4px;
 }

@@ -264,7 +264,6 @@ class Bookshelves extends Component {
                     )
                   })}
               </ul>
-              <Footer />
             </>
           )
         }}
@@ -290,7 +289,10 @@ class Bookshelves extends Component {
               <h1
                 className={`all-books-heading ${textColor}`}
               >{`${shelfName} Books`}</h1>
-              {this.renderSearchSection()}
+
+              <div className="desktop-view-search-section">
+                {this.renderSearchSection()}
+              </div>
             </div>
             {this.renderBooksList()}
           </div>
@@ -351,7 +353,6 @@ class Bookshelves extends Component {
   renderLoader = () => (
     <div className="loader-container" testid="loader">
       <Loader type="TailSpin" color="#0284C7" height={50} width={50} />
-      <Footer />
     </div>
   )
 
@@ -371,10 +372,22 @@ class Bookshelves extends Component {
 
   render() {
     return (
-      <div className="book-shelves-container">
-        <Header />
-        {this.renderBooksListDisplayBasedOnApiStatus()}
-      </div>
+      <BookHubThemeContext.Consumer>
+        {value => {
+          const {isDarkTheme} = value
+          const bgColor = isDarkTheme ? 'dark-theme' : 'light-theme'
+          return (
+            <div className={`book-shelves-container ${bgColor}`}>
+              <Header />
+              <div className="mobile-view-search-section">
+                {this.renderSearchSection()}
+              </div>
+              {this.renderBooksListDisplayBasedOnApiStatus()}
+              <Footer />
+            </div>
+          )
+        }}
+      </BookHubThemeContext.Consumer>
     )
   }
 }
