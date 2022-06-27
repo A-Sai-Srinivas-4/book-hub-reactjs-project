@@ -6,9 +6,8 @@ import Loader from 'react-loader-spinner'
 
 import Header from '../Header'
 import Footer from '../Footer'
-import BookHubThemeContext from '../../context/BookHubThemeContext'
-
 import BooksSlider from '../BooksSlider'
+import BookHubThemeContext from '../../context/BookHubThemeContext'
 
 import './index.css'
 
@@ -73,9 +72,13 @@ class Home extends Component {
         const textColor = !isDarkTheme ? 'light-theme-text' : 'dark-theme-text'
         const {booksList} = this.state
         return (
-          <ul className={`slick-container ${bgColor}`}>
-            <BooksSlider booksList={booksList} textColor={textColor} />
-          </ul>
+          <div className={`top-rated-books-carousel-container ${bgColor}`}>
+            {booksList.length === 0 ? (
+              this.renderFailureView()
+            ) : (
+              <BooksSlider booksList={booksList} textColor={textColor} />
+            )}
+          </div>
         )
       }}
     </BookHubThemeContext.Consumer>
@@ -162,7 +165,7 @@ class Home extends Component {
                       </button>
                     </Link>
                   </div>
-                  <div className={`slider-container ${bgColor1}`}>
+                  <div className={`top-rated-books-container ${bgColor1}`}>
                     <div className="top-rated-books-find-books">
                       <h1 className={`top-rated-books-heading ${textColor}`}>
                         Top Rated Books
