@@ -4,21 +4,9 @@
   margin-top: 0px;
   margin-bottom: 0px;
 }
-@media screen and (max-width: 768px) {
-  .slick-container {
-    max-width: 100%;
-    height: 203px;
-    margin-top: 0px;
-    margin-bottom: 10px;
-    margin-left: 5px;
-    margin-right: 5px;
-  }
-}
-
 .slick-item-link {
   text-decoration: none;
 }
-
 .slick-item {
   width: 100%;
   height: 100%;
@@ -29,35 +17,11 @@
   justify-content: space-around;
   align-items: center;
 }
-
-@media screen and (max-width: 768px) {
-  .slick-item {
-    width: 100%;
-    max-width: 146px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
 .logo-image {
   max-width: 80%;
   width: 350px;
   height: 224px;
   border-radius: 4px;
-}
-@media screen and (max-width: 768px) {
-  .logo-image {
-    max-width: 146px;
-    width: 90%;
-    height: 100%;
-    max-height: 92px;
-    margin-right: 15px;
-    margin-left: 15px;
-    border-radius: 2px;
-  }
 }
 .heading-container {
   text-align: center;
@@ -66,14 +30,8 @@
   justify-content: center;
   align-items: center;
 }
-@media screen and (max-width: 768px) {
-  .heading-container {
-    width: 146px;
-  }
-}
-
 .book-title {
-  font-family: 'Inter';
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
@@ -83,17 +41,8 @@
   margin-top: 15px;
   margin-bottom: 4px;
 }
-@media screen and (max-width: 768px) {
-  .book-title {
-    font-size: 12px;
-    line-height: 16px;
-    margin-top: 8px;
-    margin-bottom: 2px;
-  }
-}
-
 .author {
-  font-family: 'Inter';
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -103,21 +52,56 @@
   margin-top: 0px;
   margin-bottom: 32px;
 }
-@media screen and (max-width: 768px) {
-  .author {
-    font-size: 10px;
-    line-height: 12px;
-    margin-top: 0px;
-    margin-bottom: 16px;
-  }
-}
-/* You can change the CSS color to style the Next and 
-Previous Arrow buttons according to your project */
-
 .slick-prev:before,
 .slick-next:before {
   width: 24px;
   height: 24px;
   background: #ffffff;
   color: black;
+}
+
+/*** Mobile-view ***/
+
+@media screen and (max-width: 768px) {
+  .slick-container {
+    max-width: 100%;
+    height: 203px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .slick-item {
+    width: 100%;
+    max-width: 146px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .logo-image {
+    max-width: 146px;
+    width: 90%;
+    height: 100%;
+    max-height: 92px;
+    margin-right: 15px;
+    margin-left: 15px;
+    border-radius: 2px;
+  }
+  .heading-container {
+    width: 146px;
+  }
+  .book-title {
+    font-size: 12px;
+    line-height: 16px;
+    margin-top: 8px;
+    margin-bottom: 2px;
+  }
+  .author {
+    font-size: 10px;
+    line-height: 12px;
+    margin-top: 0px;
+    margin-bottom: 16px;
+  }
 }

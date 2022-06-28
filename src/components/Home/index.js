@@ -1,9 +1,7 @@
 import {Component} from 'react'
 import {Link} from 'react-router-dom'
-
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
-
 import Header from '../Header'
 import Footer from '../Footer'
 import BooksSlider from '../BooksSlider'
@@ -68,17 +66,55 @@ class Home extends Component {
     <BookHubThemeContext.Consumer>
       {value => {
         const {isDarkTheme} = value
-        const bgColor = isDarkTheme ? 'dark-slider' : 'slider-theme-light'
+
+        const sliderBgColor = isDarkTheme ? 'dark-slider' : 'slider-theme-light'
         const textColor = !isDarkTheme ? 'light-theme-text' : 'dark-theme-text'
         const {booksList} = this.state
         return (
-          <div className={`top-rated-books-carousel-container ${bgColor}`}>
-            {booksList.length === 0 ? (
-              this.renderFailureView()
-            ) : (
-              <BooksSlider booksList={booksList} textColor={textColor} />
-            )}
-          </div>
+          <>
+            <div className="responsive-home">
+              <h1 className={`heading ${textColor}`}>
+                Find Your Next Favorite Books?
+              </h1>
+              <p className={`description ${textColor}`}>
+                You are in the right place. Tell us what titles or genres you
+                have enjoyed in the past, and we will give you surprisingly
+                insightful recommendations.
+              </p>
+              <div className="mobile-view-find-button">
+                <Link to="/shelf">
+                  <button type="button" className="find-books-button">
+                    Find Books
+                  </button>
+                </Link>
+              </div>
+              <div className={`top-rated-books-container ${sliderBgColor}`}>
+                <div className="top-rated-books-find-books">
+                  <h1 className={`top-rated-books-heading ${textColor}`}>
+                    Top Rated Books
+                  </h1>
+                  <div className="desktop-view-find-button">
+                    <Link to="/shelf">
+                      <button type="button" className="find-books-button">
+                        Find Books
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+
+                {booksList.length === 0 ? (
+                  this.renderFailureView()
+                ) : (
+                  <div
+                    className={`top-rated-books-carousel-container ${sliderBgColor}`}
+                  >
+                    <BooksSlider booksList={booksList} textColor={textColor} />
+                  </div>
+                )}
+              </div>
+              <Footer />
+            </div>
+          </>
         )
       }}
     </BookHubThemeContext.Consumer>
@@ -105,15 +141,14 @@ class Home extends Component {
             <p className={`${textColor} home-failure-heading`}>
               Something went wrong, Please try again.
             </p>
-            <div>
-              <button
-                type="button"
-                onClick={this.onClickTryAgain}
-                className="home-try-again-button"
-              >
-                Try Again
-              </button>
-            </div>
+
+            <button
+              type="button"
+              onClick={this.onClickTryAgain}
+              className="home-try-again-button"
+            >
+              Try Again
+            </button>
           </div>
         )
       }}
@@ -140,50 +175,13 @@ class Home extends Component {
         {value => {
           const {isDarkTheme} = value
           const bgColor = isDarkTheme ? 'dark-theme' : 'light-theme'
-          const bgColor1 = isDarkTheme ? 'dark-slider' : 'slider-theme-light'
-          const textColor = !isDarkTheme
-            ? 'light-theme-text'
-            : 'dark-theme-text'
-
           return (
-            <div>
+            <>
               <Header />
               <div className={`home-container ${bgColor}`}>
-                <div className={`responsive-home ${bgColor}`}>
-                  <h1 className={`heading ${textColor}`}>
-                    Find Your Next Favorite Books?
-                  </h1>
-                  <p className={`description ${textColor}`}>
-                    You are in the right place. Tell us what titles or genres
-                    you have enjoyed in the past, and we will give you
-                    surprisingly insightful recommendations.
-                  </p>
-                  <div className="mobile-view-find-button">
-                    <Link to="/shelf">
-                      <button type="button" className="find-books-button">
-                        Find Books
-                      </button>
-                    </Link>
-                  </div>
-                  <div className={`top-rated-books-container ${bgColor1}`}>
-                    <div className="top-rated-books-find-books">
-                      <h1 className={`top-rated-books-heading ${textColor}`}>
-                        Top Rated Books
-                      </h1>
-                      <div className="desktop-view-find-button">
-                        <Link to="/shelf">
-                          <button type="button" className="find-books-button">
-                            Find Books
-                          </button>
-                        </Link>
-                      </div>
-                    </div>
-                    {this.renderBooksListBasedOnApiStatus()}
-                  </div>
-                  <Footer />
-                </div>
+                {this.renderBooksListBasedOnApiStatus()}
               </div>
-            </div>
+            </>
           )
         }}
       </BookHubThemeContext.Consumer>

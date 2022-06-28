@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import {Link} from 'react-router-dom'
 import Slider from 'react-slick'
-
+import BookHubThemeContext from '../../context/BookHubThemeContext'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
@@ -40,22 +40,30 @@ const settings = {
 
 class BooksSlider extends Component {
   renderSlider = booksList => (
-    <Slider {...settings}>
-      {booksList.map(eachLogo => {
-        const {id, authorName, coverPic, title} = eachLogo
+    <BookHubThemeContext.Consumer>
+      {value => {
+        const {isDarkTheme} = value
+        const textColor = !isDarkTheme ? 'light-theme-text' : 'dark-theme-text'
         return (
-          <Link className="slick-item-link" to={`/books/${id}`} key={id}>
-            <div className="slick-item">
-              <img className="logo-image" src={coverPic} alt={title} />
-              <div className="heading-container">
-                <h1 className="book-title">{title}</h1>
-                <p className="author">{authorName}</p>
-              </div>
-            </div>
-          </Link>
+          <Slider {...settings}>
+            {booksList.map(eachLogo => {
+              const {id, authorName, coverPic, title} = eachLogo
+              return (
+                <Link className="slick-item-link" to={`/books/${id}`} key={id}>
+                  <div className="slick-item">
+                    <img className="logo-image" src={coverPic} alt={title} />
+                    <div className="heading-container">
+                      <h1 className={`book-title ${textColor}`}>{title}</h1>
+                      <p className={`author ${textColor}`}>{authorName}</p>
+                    </div>
+                  </div>
+                </Link>
+              )
+            })}
+          </Slider>
         )
-      })}
-    </Slider>
+      }}
+    </BookHubThemeContext.Consumer>
   )
 
   render() {

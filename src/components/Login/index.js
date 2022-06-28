@@ -30,7 +30,7 @@ class Login extends Component {
   submitSuccess = jwtToken => {
     const {history} = this.props
     Cookies.set('jwt_token', jwtToken, {expires: 30})
-    history.push('/')
+    history.replace('/')
   }
 
   submitFailure = errorMsg => {
@@ -79,7 +79,7 @@ class Login extends Component {
   }
 
   renderPasswordField = () => {
-    const {password, isPasswordVisible} = this.state
+    const {password} = this.state
 
     return (
       <>
@@ -88,26 +88,13 @@ class Login extends Component {
         </label>
 
         <input
-          type={isPasswordVisible ? 'text' : 'password'}
+          type="password"
           id="password"
           className="password-input-field"
           value={password}
           onChange={this.onChangePassword}
           placeholder="Enter Password"
         />
-
-        <div className="check-box-container">
-          <input
-            type="checkbox"
-            id="show-password"
-            checked={isPasswordVisible}
-            onChange={this.onClickCheckbox}
-            className="check"
-          />
-          <label className="input-label show-password" htmlFor="show-password">
-            Show Password
-          </label>
-        </div>
       </>
     )
   }
@@ -121,12 +108,12 @@ class Login extends Component {
           <img
             src="https://res.cloudinary.com/dcci6hybb/image/upload/v1656069514/Group_7731_uau5pk.png"
             className="logo-desktop-image"
-            alt="logo"
+            alt="website login"
           />
           <img
             src="https://res.cloudinary.com/dcci6hybb/image/upload/v1656069514/Group_7731_uau5pk.png"
             className="logo-mobile-image"
-            alt="logo"
+            alt="website login"
           />
         </div>
         <div className="input-container">{this.renderUsernameField()}</div>
@@ -134,7 +121,7 @@ class Login extends Component {
         <button type="submit" className="login-button">
           Login
         </button>
-        {showSubmitError && <p className="error-message">{errorMsg}</p>}
+        {showSubmitError && <p className="error-message">*{errorMsg}</p>}
       </form>
     )
   }
@@ -151,12 +138,12 @@ class Login extends Component {
         <img
           src="https://res.cloudinary.com/dcci6hybb/image/upload/v1656069503/Rectangle_1467_1x_dvekuk.png"
           className="login-desktop-image"
-          alt="website img"
+          alt="login website logo"
         />
         <img
           src="https://res.cloudinary.com/dcci6hybb/image/upload/v1656069503/Rectangle_1467_1x_dvekuk.png"
           className="login-mobile-image"
-          alt="website img"
+          alt="login website logo"
         />
 
         <div className="logo-and-login-form-container">

@@ -98,7 +98,7 @@ class BookDetails extends Component {
                     {rating}
                   </p>
                   <p className={`read-status ${textColor}`}>
-                    Status :{'  '}
+                    Status:{'  '}
                     <span className="read-status-span-text">{readStatus}</span>
                   </p>
                 </div>
@@ -174,7 +174,7 @@ class BookDetails extends Component {
           const {isDarkTheme} = value
           const bgColor = isDarkTheme ? 'dark-theme' : 'light-theme'
           return (
-            <div className={`bookdetails-container ${bgColor}`}>
+            <div className={`book-details-container ${bgColor}`}>
               <Header />
               <div className={`responsive-container ${bgColor}`}>
                 {this.renderBookDetailsBasedOnApiStatus()}
