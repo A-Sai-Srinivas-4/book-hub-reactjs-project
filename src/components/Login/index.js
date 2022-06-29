@@ -79,7 +79,7 @@ class Login extends Component {
   }
 
   renderPasswordField = () => {
-    const {password} = this.state
+    const {password, isPasswordVisible} = this.state
 
     return (
       <>
@@ -88,13 +88,26 @@ class Login extends Component {
         </label>
 
         <input
-          type="password"
+          type={isPasswordVisible ? 'text' : 'password'}
           id="password"
           className="password-input-field"
           value={password}
           onChange={this.onChangePassword}
           placeholder="Enter Password"
         />
+
+        <div className="check-box-container">
+          <input
+            type="checkbox"
+            id="show-password"
+            checked={isPasswordVisible}
+            onChange={this.onClickCheckbox}
+            className="check"
+          />
+          <label className="input-label show-password" htmlFor="show-password">
+            Show Password
+          </label>
+        </div>
       </>
     )
   }
