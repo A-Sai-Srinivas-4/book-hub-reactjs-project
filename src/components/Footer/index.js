@@ -1,9 +1,9 @@
 import {FaGoogle, FaTwitter, FaInstagram, FaYoutube} from 'react-icons/fa'
-import BookHubThemeContext from '../../context/BookHubThemeContext'
+import BookHubContext from '../../context/BookHubContext'
 import './index.css'
 
 const Footer = () => (
-  <BookHubThemeContext.Consumer>
+  <BookHubContext.Consumer>
     {value => {
       const {isDarkTheme} = value
       const bgColor = isDarkTheme ? 'dark-theme' : 'light-theme'
@@ -29,6 +29,6 @@ const Footer = () => (
         </div>
       )
     }}
-  </BookHubThemeContext.Consumer>
+  </BookHubContext.Consumer>
 )
 export default Footer

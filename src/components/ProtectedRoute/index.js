@@ -6,9 +6,13 @@ const ProtectedRoute = props => {
 
   if (token === undefined) {
     return <Redirect to="/login" />
+    /* When an unauthenticated user tries to access the Home, Bookshelves and Book Details Route,
+     then the page should be navigated to the Login Route */
   }
 
   return <Route {...props} />
+  /* When an authenticated user tries to access the Home, Bookshelves and Book Details Route,
+   then the page should be navigated to the respective route */
 }
 
 export default ProtectedRoute

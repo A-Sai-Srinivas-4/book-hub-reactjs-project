@@ -4,7 +4,7 @@ import Loader from 'react-loader-spinner'
 import {BsFillStarFill} from 'react-icons/bs'
 import Header from '../Header'
 import Footer from '../Footer'
-import BookHobThemeContext from '../../context/BookHubThemeContext'
+import BookHubContext from '../../context/BookHubContext'
 
 import './index.css'
 
@@ -34,6 +34,8 @@ class BookDetails extends Component {
   })
 
   getBookDetails = async () => {
+    /* Loader should be displayed while fetching the data */
+
     this.setState({apiStatus: apiStatusConstants.inProgress})
     const jwtToken = Cookies.get('jwt_token')
     const {match} = this.props
@@ -48,6 +50,10 @@ class BookDetails extends Component {
         Authorization: `Bearer ${jwtToken}`,
       },
     }
+
+    /* An HTTP GET request should be made to Book Details API URL 
+    with jwt_token in the Cookies and book id as path parameter */
+
     const response = await fetch(apiUrl, options)
     if (response.ok) {
       const fetchedData = await response.json()
@@ -68,7 +74,7 @@ class BookDetails extends Component {
   }
 
   renderBookDetailsView = () => (
-    <BookHobThemeContext.Consumer>
+    <BookHubContext.Consumer>
       {value => {
         const {isDarkTheme} = value
         const bgColor = isDarkTheme ? 'card-dark-theme' : 'card-light-theme'
@@ -84,6 +90,9 @@ class BookDetails extends Component {
           rating,
         } = bookDetails
         return (
+          /* After the data is fetched successfully,
+             book details received from the response should be displayed */
+
           <div className={`book-details-responsive-container ${bgColor}`}>
             <div className="book-details-top-card">
               <div className="cover-pic-description-container">
@@ -114,7 +123,7 @@ class BookDetails extends Component {
           </div>
         )
       }}
-    </BookHobThemeContext.Consumer>
+    </BookHubContext.Consumer>
   )
 
   renderLoader = () => (
@@ -123,8 +132,10 @@ class BookDetails extends Component {
     </div>
   )
 
+  /* If the HTTP GET request made is unsuccessful, then the failure view should be displayed */
+
   renderFailureView = () => (
-    <BookHobThemeContext.Consumer>
+    <BookHubContext.Consumer>
       {value => {
         const {isDarkTheme} = value
         const textColor = !isDarkTheme ? 'light-theme-text' : 'dark-theme-text'
@@ -139,6 +150,8 @@ class BookDetails extends Component {
               Something went wrong, Please try again.
             </p>
             <div>
+              {/* When the Try Again button is clicked,
+             an HTTP GET request should be made to Book Details API URL */}
               <button
                 type="button"
                 onClick={this.onClickTryAgain}
@@ -150,7 +163,7 @@ class BookDetails extends Component {
           </div>
         )
       }}
-    </BookHobThemeContext.Consumer>
+    </BookHubContext.Consumer>
   )
 
   renderBookDetailsBasedOnApiStatus = () => {
@@ -169,7 +182,7 @@ class BookDetails extends Component {
 
   render() {
     return (
-      <BookHobThemeContext.Consumer>
+      <BookHubContext.Consumer>
         {value => {
           const {isDarkTheme} = value
           const bgColor = isDarkTheme ? 'dark-theme' : 'light-theme'
@@ -183,7 +196,7 @@ class BookDetails extends Component {
             </div>
           )
         }}
-      </BookHobThemeContext.Consumer>
+      </BookHubContext.Consumer>
     )
   }
 }

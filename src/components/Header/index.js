@@ -6,21 +6,22 @@ import {ImBooks} from 'react-icons/im'
 import {AiOutlineClose} from 'react-icons/ai'
 import {FiLogOut, FiSun} from 'react-icons/fi'
 import Cookies from 'js-cookie'
-import BookHubThemeContext from '../../context/BookHubThemeContext'
+import BookHubContext from '../../context/BookHubContext'
+
 import './index.css'
 
 class Header extends Component {
-  state = {isToggle: true}
+  state = {isMobileView: true}
 
   onClickCloseIcon = () => {
     this.setState(prevState => ({
-      isToggle: !prevState.isToggle,
+      isMobileView: !prevState.isMobileView,
     }))
   }
 
   onClickMenuIcon = () => {
     this.setState(prevState => ({
-      isToggle: !prevState.isToggle,
+      isMobileView: !prevState.isMobileView,
     }))
   }
 
@@ -31,9 +32,9 @@ class Header extends Component {
   }
 
   render() {
-    const {isToggle} = this.state
+    const {isMobileView} = this.state
     return (
-      <BookHubThemeContext.Consumer>
+      <BookHubContext.Consumer>
         {value => {
           const {isDarkTheme, onClickThemeIcon} = value
 
@@ -51,6 +52,9 @@ class Header extends Component {
           return (
             <nav className={`navbar ${bgColor}`}>
               <div className={`header-responsive-navbar ${bgColor}`}>
+                {/* When the Book Hub logo in the header is clicked,
+               then the page should be navigated to the Home Route */}
+
                 <Link to="/">
                   <img
                     src="https://res.cloudinary.com/diocftr6t/image/upload/v1651940745/Group_7731Website_Logo_o1zltx.png"
@@ -60,12 +64,21 @@ class Header extends Component {
                 </Link>
 
                 <ul className="nav-items-container">
+                  {/* When the Home link in the header is clicked,
+                 then the page should be navigated to the Home Route */}
+
                   <Link to="/" className="nav-links">
                     <li className={`nav-text ${textColor}`}>Home</li>
                   </Link>
+                  {/* When the Bookshelves link in the header is clicked,
+                   then the page should be navigated to the Bookshelves Route */}
+
                   <Link to="/shelf" className="nav-links">
                     <li className={`nav-text ${textColor}`}>Bookshelves</li>
                   </Link>
+                  {/* When the Sun Icon in the header is clicked,
+                   then the page Theme changes to Light or Dark Color */}
+
                   <button
                     type="button"
                     onClick={onClickThemeButton}
@@ -73,6 +86,9 @@ class Header extends Component {
                   >
                     <FiSun className={textColor} size={25} />
                   </button>
+                  {/* When the Logout button in the header is clicked,
+                   then the page should be navigated to the Login Route */}
+
                   <Link to="/login" className="nav-links">
                     <li>
                       <button
@@ -85,7 +101,7 @@ class Header extends Component {
                     </li>
                   </Link>
                 </ul>
-                {isToggle ? (
+                {isMobileView ? (
                   <button
                     type="button"
                     className="menu-icon"
@@ -132,7 +148,7 @@ class Header extends Component {
             </nav>
           )
         }}
-      </BookHubThemeContext.Consumer>
+      </BookHubContext.Consumer>
     )
   }
 }

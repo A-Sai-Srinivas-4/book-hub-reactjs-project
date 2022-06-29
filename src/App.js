@@ -6,7 +6,7 @@ import Bookshelves from './components/BookShelves'
 import BookDetails from './components/BookDetails'
 import NotFound from './components/NotFound'
 import ProtectedRoute from './components/ProtectedRoute'
-import BookHubThemeContext from './context/BookHubThemeContext'
+import BookHubContext from './context/BookHubContext'
 
 import './App.css'
 
@@ -23,7 +23,7 @@ class App extends Component {
     const {isDarkTheme} = this.state
     /* console.log(isDarkTheme) */
     return (
-      <BookHubThemeContext.Provider
+      <BookHubContext.Provider
         value={{
           isDarkTheme,
           onClickThemeIcon: this.onClickThemeIcon,
@@ -39,7 +39,7 @@ class App extends Component {
             <Redirect to="/not-found" />
           </Switch>
         </>
-      </BookHubThemeContext.Provider>
+      </BookHubContext.Provider>
     )
   }
 }

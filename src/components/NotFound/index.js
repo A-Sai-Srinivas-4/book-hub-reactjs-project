@@ -2,6 +2,8 @@ import {Link} from 'react-router-dom'
 import './index.css'
 
 const NotFound = () => (
+  /* When a random path is provided as the URL path, then the page should be navigated to the Not Found Route */
+
   <div className="not-found-container">
     <img
       src="https://res.cloudinary.com/diocftr6t/image/upload/v1651940898/Group_7484PageNotFound_o7uk9v.png"

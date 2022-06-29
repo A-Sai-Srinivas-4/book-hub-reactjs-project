@@ -31,6 +31,8 @@ class Login extends Component {
     const {history} = this.props
     Cookies.set('jwt_token', jwtToken, {expires: 30})
     history.replace('/')
+    /* When the valid username and password are provided and the Login button is clicked, 
+    then the page should be navigated to the Home Route */
   }
 
   submitFailure = errorMsg => {
@@ -95,6 +97,7 @@ class Login extends Component {
           onChange={this.onChangePassword}
           placeholder="Enter Password"
         />
+        {/* Here I implemented 'Show Password' Option  it helps to User to see password */}
 
         <div className="check-box-container">
           <input
@@ -121,20 +124,24 @@ class Login extends Component {
           <img
             src="https://res.cloudinary.com/dcci6hybb/image/upload/v1656069514/Group_7731_uau5pk.png"
             className="logo-desktop-image"
-            alt="website login"
+            alt="login website logo"
           />
           <img
             src="https://res.cloudinary.com/dcci6hybb/image/upload/v1656069514/Group_7731_uau5pk.png"
             className="logo-mobile-image"
-            alt="website login"
+            alt="login website logo"
           />
         </div>
         <div className="input-container">{this.renderUsernameField()}</div>
         <div className="input-container">{this.renderPasswordField()}</div>
+
         <button type="submit" className="login-button">
           Login
         </button>
         {showSubmitError && <p className="error-message">*{errorMsg}</p>}
+
+        {/* When the invalid username and password are provided and the Login button is clicked,
+        then the respective error message received from the response should be displayed */}
       </form>
     )
   }
@@ -151,12 +158,12 @@ class Login extends Component {
         <img
           src="https://res.cloudinary.com/dcci6hybb/image/upload/v1656069503/Rectangle_1467_1x_dvekuk.png"
           className="login-desktop-image"
-          alt="login website logo"
+          alt="website login"
         />
         <img
           src="https://res.cloudinary.com/dcci6hybb/image/upload/v1656069503/Rectangle_1467_1x_dvekuk.png"
           className="login-mobile-image"
-          alt="login website logo"
+          alt="website login"
         />
 
         <div className="logo-and-login-form-container">

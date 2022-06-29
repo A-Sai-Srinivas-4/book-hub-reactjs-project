@@ -3,10 +3,10 @@ import {Link} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import {BsSearch, BsFillStarFill} from 'react-icons/bs'
-
 import Header from '../Header'
 import Footer from '../Footer'
-import BookHubThemeContext from '../../context/BookHubThemeContext'
+import BookHubContext from '../../context/BookHubContext'
+
 import './index.css'
 
 const bookshelvesList = [
@@ -44,6 +44,7 @@ class Bookshelves extends Component {
     booksList: [],
     searchInput: '',
     searchText: '',
+    /* The page should initially consist of All Books heading */
     bookshelfName: bookshelvesList[0].labelValue,
     apiStatus: apiStatusConstants.initial,
   }
@@ -62,6 +63,7 @@ class Bookshelves extends Component {
   })
 
   getBooks = async () => {
+    /* Loader should be displayed while fetching the data */
     this.setState({apiStatus: apiStatusConstants.inProgress})
     const {bookshelfName, searchText} = this.state
     const apiUrl = `https://apis.ccbp.in/book-hub/books?shelf=${bookshelfName}&search=${searchText}`
@@ -72,6 +74,12 @@ class Bookshelves extends Component {
         Authorization: `Bearer ${jwtToken}`,
       },
     }
+
+    /* When an authenticated user opens the Bookshelves Route
+    An HTTP GET request should be made to Books API URL with jwt_token
+    in the Cookies and query parameters shelf and search with initial
+    values as ALL and empty string respectively */
+
     const response = await fetch(apiUrl, options)
     if (response.ok) {
       const fetchedData = await response.json()
@@ -80,6 +88,7 @@ class Bookshelves extends Component {
         this.formattedData(eachBook),
       )
       /* console.log(updatedList) */
+
       this.setState({
         booksList: updatedList,
         apiStatus: apiStatusConstants.success,
@@ -107,7 +116,7 @@ class Bookshelves extends Component {
   }
 
   renderBookShelvesListSection = () => (
-    <BookHubThemeContext.Consumer>
+    <BookHubContext.Consumer>
       {value => {
         const {isDarkTheme} = value
         const bgColor = isDarkTheme
@@ -117,6 +126,7 @@ class Bookshelves extends Component {
         const buttonText = isDarkTheme
           ? 'shelf-button-dark-text'
           : 'shelf-button-light-text'
+
         return (
           <div className={`books-shelves-list-container ${bgColor}`}>
             <h1 className={`bookshelves-heading ${textColor}`}>Bookshelves</h1>
@@ -126,13 +136,15 @@ class Bookshelves extends Component {
                 const onClickShelf = () => {
                   this.onClickShelfItem(labelValue)
                 }
-                const {bookshelfName} = this.state
-                const isActive = labelValue === bookshelfName
+                const {bookShelfName} = this.state
+                const isActive = labelValue === bookShelfName
                 console.log(isActive)
                 const textStyle = isActive
                   ? 'active-shelf-button'
                   : 'shelf-button'
                 return (
+                  /* After the data is fetched successfully,
+                   display the list of books received from the response */
                   <li key={eachType.id} className="book-shelf">
                     <button
                       type="button"
@@ -148,11 +160,11 @@ class Bookshelves extends Component {
           </div>
         )
       }}
-    </BookHubThemeContext.Consumer>
+    </BookHubContext.Consumer>
   )
 
   renderSearchSection = () => (
-    <BookHubThemeContext.Consumer>
+    <BookHubContext.Consumer>
       {value => {
         const {isDarkTheme} = value
         const bgColor = isDarkTheme ? 'search-dark-theme' : 'light-theme'
@@ -179,11 +191,11 @@ class Bookshelves extends Component {
           </div>
         )
       }}
-    </BookHubThemeContext.Consumer>
+    </BookHubContext.Consumer>
   )
 
   renderNoBooksView = () => (
-    <BookHubThemeContext.Consumer>
+    <BookHubContext.Consumer>
       {value => {
         const {isDarkTheme} = value
         const textColor = !isDarkTheme ? 'light-theme-text' : 'dark-theme-text'
@@ -201,14 +213,14 @@ class Bookshelves extends Component {
           </div>
         )
       }}
-    </BookHubThemeContext.Consumer>
+    </BookHubContext.Consumer>
   )
 
   renderBooksList = () => {
     const {booksList} = this.state
     const isEmptyBooksList = booksList.length === 0
     return (
-      <BookHubThemeContext.Consumer>
+      <BookHubContext.Consumer>
         {value => {
           const {isDarkTheme} = value
           const textColor = !isDarkTheme
@@ -267,12 +279,12 @@ class Bookshelves extends Component {
             </>
           )
         }}
-      </BookHubThemeContext.Consumer>
+      </BookHubContext.Consumer>
     )
   }
 
   renderBooksDisplaySection = () => (
-    <BookHubThemeContext.Consumer>
+    <BookHubContext.Consumer>
       {value => {
         const {isDarkTheme} = value
         const textColor = !isDarkTheme ? 'light-theme-text' : 'dark-theme-text'
@@ -281,11 +293,14 @@ class Bookshelves extends Component {
           eachShelf => eachShelf.labelValue === bookshelfName,
         )
         /* console.log(bookShelf) */
+
         const shelfName = bookShelf[0].label
 
         return (
           <div className="books-display-container">
             <div className="heading-search-container">
+              {/* The All Books heading changed to {shelf name} Books.
+             Here the shelf name refers to the clicked bookshelf label from the provided bookshelvesList */}
               <h1
                 className={`all-books-heading ${textColor}`}
               >{`${shelfName} Books`}</h1>
@@ -298,11 +313,11 @@ class Bookshelves extends Component {
           </div>
         )
       }}
-    </BookHubThemeContext.Consumer>
+    </BookHubContext.Consumer>
   )
 
   renderBookShelvesSection = () => (
-    <BookHubThemeContext.Consumer>
+    <BookHubContext.Consumer>
       {value => {
         const {isDarkTheme} = value
         const bgColor = isDarkTheme ? 'dark-theme' : 'light-theme'
@@ -315,11 +330,12 @@ class Bookshelves extends Component {
           </div>
         )
       }}
-    </BookHubThemeContext.Consumer>
+    </BookHubContext.Consumer>
   )
+  /* If the HTTP GET request made is unsuccessful, then the failure view should be displayed */
 
   renderFailureView = () => (
-    <BookHubThemeContext.Consumer>
+    <BookHubContext.Consumer>
       {value => {
         const {isDarkTheme} = value
         const textColor = !isDarkTheme ? 'light-theme-text' : 'dark-theme-text'
@@ -335,6 +351,8 @@ class Bookshelves extends Component {
               Something went wrong, Please try again.
             </p>
             <div>
+              {/* When the Try Again button is clicked,
+             an HTTP GET request should be made to Books API URL */}
               <button
                 type="button"
                 onClick={this.onClickTryAgain}
@@ -347,7 +365,7 @@ class Bookshelves extends Component {
           </div>
         )
       }}
-    </BookHubThemeContext.Consumer>
+    </BookHubContext.Consumer>
   )
 
   renderLoader = () => (
@@ -372,7 +390,7 @@ class Bookshelves extends Component {
 
   render() {
     return (
-      <BookHubThemeContext.Consumer>
+      <BookHubContext.Consumer>
         {value => {
           const {isDarkTheme} = value
           const bgColor = isDarkTheme ? 'dark-theme' : 'light-theme'
@@ -387,7 +405,7 @@ class Bookshelves extends Component {
             </div>
           )
         }}
-      </BookHubThemeContext.Consumer>
+      </BookHubContext.Consumer>
     )
   }
 }

@@ -5,7 +5,7 @@ import Loader from 'react-loader-spinner'
 import Header from '../Header'
 import Footer from '../Footer'
 import BooksSlider from '../BooksSlider'
-import BookHubThemeContext from '../../context/BookHubThemeContext'
+import BookHubContext from '../../context/BookHubContext'
 
 import './index.css'
 
@@ -20,7 +20,7 @@ class Home extends Component {
   state = {booksList: [], apiStatus: apiStatusConstants.initial}
 
   componentDidMount() {
-    this.getBooks()
+    this.getTopRatedBooks()
   }
 
   formattedData = book => ({
@@ -30,8 +30,9 @@ class Home extends Component {
     authorName: book.author_name,
   })
 
-  getBooks = async () => {
+  getTopRatedBooks = async () => {
     this.setState({apiStatus: apiStatusConstants.inProgress})
+    /* Loader should be displayed while fetching the data */
 
     const jwtToken = Cookies.get('jwt_token')
     const options = {
@@ -40,9 +41,12 @@ class Home extends Component {
         Authorization: `Bearer ${jwtToken}`,
       },
     }
-    const getBooksUrl = 'https://apis.ccbp.in/book-hub/top-rated-books'
+    const getTopRatedBooksUrl = 'https://apis.ccbp.in/book-hub/top-rated-books'
 
-    const response = await fetch(getBooksUrl, options)
+    /* When an authenticated user opens the Home Route, 
+  An HTTP GET request should be made to Top Rated Books API URL with jwt_token in the Cookies */
+
+    const response = await fetch(getTopRatedBooksUrl, options)
     if (response.ok) {
       const fetchedData = await response.json()
       /* console.log(fetchedData) */
@@ -59,11 +63,57 @@ class Home extends Component {
   }
 
   onClickTryAgain = () => {
-    this.getBooks()
+    this.getTopRatedBooks()
   }
 
-  renderSlider = () => (
-    <BookHubThemeContext.Consumer>
+  /* Inprogress View */
+
+  renderLoader = () => (
+    <div className="loader" testid="loader">
+      <Loader type="TailSpin" color="#0284C7" height={50} width={50} />
+    </div>
+  )
+
+  /* Failure View */
+
+  /* If the HTTP GET request made is unsuccessful, then the failure should be displayed */
+
+  renderFailureView = () => (
+    <BookHubContext.Consumer>
+      {value => {
+        const {isDarkTheme} = value
+        const textColor = !isDarkTheme ? 'light-theme-text' : 'dark-theme-text'
+        return (
+          <div className="home-failure-view-container">
+            <img
+              src="https://res.cloudinary.com/diocftr6t/image/upload/v1651940772/Group_7522Failure_Image_ykvhlm.png"
+              className="home-failure-image"
+              alt="failure view"
+            />
+            <p className={`${textColor} home-failure-heading`}>
+              Something went wrong, Please try again.
+            </p>
+
+            {/* When the Try Again button is clicked, 
+            an HTTP GET request should be made to Top Rated Books API URL */}
+
+            <button
+              type="button"
+              onClick={this.onClickTryAgain}
+              className="home-try-again-button"
+            >
+              Try Again
+            </button>
+          </div>
+        )
+      }}
+    </BookHubContext.Consumer>
+  )
+
+  /* Success View */
+
+  renderSuccessView = () => (
+    <BookHubContext.Consumer>
       {value => {
         const {isDarkTheme} = value
 
@@ -82,6 +132,9 @@ class Home extends Component {
                 insightful recommendations.
               </p>
               <div className="mobile-view-find-button">
+                {/* When the Find Books button is clicked,
+               then the page should be navigated to the Bookshelves Route */}
+
                 <Link to="/shelf">
                   <button type="button" className="find-books-button">
                     Find Books
@@ -94,6 +147,9 @@ class Home extends Component {
                     Top Rated Books
                   </h1>
                   <div className="desktop-view-find-button">
+                    {/* When the Find Books button is clicked,
+               then the page should be navigated to the Bookshelves Route */}
+
                     <Link to="/shelf">
                       <button type="button" className="find-books-button">
                         Find Books
@@ -108,7 +164,7 @@ class Home extends Component {
                   <div
                     className={`top-rated-books-carousel-container ${sliderBgColor}`}
                   >
-                    <BooksSlider booksList={booksList} textColor={textColor} />
+                    <BooksSlider booksList={booksList} />
                   </div>
                 )}
               </div>
@@ -117,49 +173,14 @@ class Home extends Component {
           </>
         )
       }}
-    </BookHubThemeContext.Consumer>
-  )
-
-  renderLoader = () => (
-    <div className="loader" testid="loader">
-      <Loader type="TailSpin" color="#0284C7" height={50} width={50} />
-    </div>
-  )
-
-  renderFailureView = () => (
-    <BookHubThemeContext.Consumer>
-      {value => {
-        const {isDarkTheme} = value
-        const textColor = !isDarkTheme ? 'light-theme-text' : 'dark-theme-text'
-        return (
-          <div className="home-failure-view-container">
-            <img
-              src="https://res.cloudinary.com/diocftr6t/image/upload/v1651940772/Group_7522Failure_Image_ykvhlm.png"
-              className="home-failure-image"
-              alt="failure view"
-            />
-            <p className={`${textColor} home-failure-heading`}>
-              Something went wrong, Please try again.
-            </p>
-
-            <button
-              type="button"
-              onClick={this.onClickTryAgain}
-              className="home-try-again-button"
-            >
-              Try Again
-            </button>
-          </div>
-        )
-      }}
-    </BookHubThemeContext.Consumer>
+    </BookHubContext.Consumer>
   )
 
   renderBooksListBasedOnApiStatus = () => {
     const {apiStatus} = this.state
     switch (apiStatus) {
       case apiStatusConstants.success:
-        return this.renderSlider()
+        return this.renderSuccessView()
       case apiStatusConstants.failure:
         return this.renderFailureView()
       case apiStatusConstants.inProgress:
@@ -171,7 +192,7 @@ class Home extends Component {
 
   render() {
     return (
-      <BookHubThemeContext.Consumer>
+      <BookHubContext.Consumer>
         {value => {
           const {isDarkTheme} = value
           const bgColor = isDarkTheme ? 'dark-theme' : 'light-theme'
@@ -184,7 +205,7 @@ class Home extends Component {
             </>
           )
         }}
-      </BookHubThemeContext.Consumer>
+      </BookHubContext.Consumer>
     )
   }
 }
