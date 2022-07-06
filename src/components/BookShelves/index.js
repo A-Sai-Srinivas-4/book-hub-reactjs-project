@@ -45,7 +45,7 @@ class Bookshelves extends Component {
     searchInput: '',
     searchText: '',
     /* The page should initially consist of All Books heading */
-    bookshelfName: bookshelvesList[0].labelValue,
+    bookShelfName: bookshelvesList[0].labelValue,
     apiStatus: apiStatusConstants.initial,
   }
 
@@ -65,8 +65,8 @@ class Bookshelves extends Component {
   getBooks = async () => {
     /* Loader should be displayed while fetching the data */
     this.setState({apiStatus: apiStatusConstants.inProgress})
-    const {bookshelfName, searchText} = this.state
-    const apiUrl = `https://apis.ccbp.in/book-hub/books?shelf=${bookshelfName}&search=${searchText}`
+    const {bookShelfName, searchText} = this.state
+    const apiUrl = `https://apis.ccbp.in/book-hub/books?shelf=${bookShelfName}&search=${searchText}`
     const jwtToken = Cookies.get('jwt_token')
     const options = {
       method: 'GET',
@@ -99,7 +99,7 @@ class Bookshelves extends Component {
   }
 
   onClickShelfItem = value => {
-    this.setState({bookshelfName: value}, this.getBooks)
+    this.setState({bookShelfName: value}, this.getBooks)
   }
 
   onChangeSearchText = event => {
@@ -177,7 +177,7 @@ class Bookshelves extends Component {
               type="search"
               value={searchInput}
               onChange={this.onChangeSearchText}
-              className={`search-element ${textColor}`}
+              className={`search-element ${bgColor} ${textColor}`}
               placeholder="Search"
             />
             <button
@@ -288,9 +288,9 @@ class Bookshelves extends Component {
       {value => {
         const {isDarkTheme} = value
         const textColor = !isDarkTheme ? 'light-theme-text' : 'dark-theme-text'
-        const {bookshelfName} = this.state
+        const {bookShelfName} = this.state
         const bookShelf = bookshelvesList.filter(
-          eachShelf => eachShelf.labelValue === bookshelfName,
+          eachShelf => eachShelf.labelValue === bookShelfName,
         )
         /* console.log(bookShelf) */
 

@@ -117,13 +117,11 @@
 .search-element {
   height: 100%;
   width: 100%;
-  background-color: #ffffff;
   border-radius: 0px 1px 1px 0px;
   border: none;
   outline: none;
   cursor: pointer;
   padding-left: 10px;
-  color: #94a3b8;
 }
 .search-button {
   height: 100%;
